@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Past Crime Detection</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        body {
+            background: #fff;
+            color: #333;
+            text-align: center;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #222;
+            padding: 15px 30px;
+        }
+
+        .logo img {
+            width: 100px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #FF69B4;
+        }
+
+        .cta-btn {
+            background: #FF69B4;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        .cta-btn:hover {
+            background: #fff;
+            color: #FF69B4;
+        }
+        /* header {
+            background: linear-gradient(90deg, #6a11cb, #ff69b4);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        } */
+        #map {
+            height: 500px;
+            width: 90%;
+            margin: 20px auto;
+            border-radius: 10px;
+            position: relative;
+        }
+        .legend {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+        .legend div {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .legend span {
+            width: 15px;
+            height: 15px;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        .survey-btn {
+            display: block;
+            width: 250px;
+            margin: 10px auto;
+            padding: 10px;
+            background: #ff69b4;
+            color: white;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        
+        <nav class="navbar">
+            <div class="logo"><img src="logo.jpeg" alt="SHE Logo"></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <!-- <li><a href="live-view.html">Guardian Eye</a></li> -->
+                <li><a href="safe-street.html">Safe_Street</a></li>
+                <li><a href="crimespots.html">Past Crime</a></li>
+                <li><a href="msg.html">Contribute</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="cta-btn">Join Us</button>
+        </nav>
+        
+    </header>
+
+    <button class="survey-btn" onclick="updateCrimeData()">📢 Update Crime Zones via Survey</button>
+
+    <div id="map"></div>
+
+    <div class="legend">
+        <strong>Crime Severity:</strong>
+        <div><span style="background: red;"></span> High Risk</div>
+        <div><span style="background: yellow;"></span> Medium Risk</div>
+        <div><span style="background: green;"></span> Low Risk</div>
+    </div>
+
+    <script>
+        let crimeMap = L.map('map').setView([28.6139, 77.2090], 12);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(crimeMap);
+
+        let crimeSpots = [
+            { lat: 28.6353, lng: 77.2250, desc: "Robbery - 10 cases", level: "high" },
+            { lat: 28.6129, lng: 77.2310, desc: "Assault - 5 cases", level: "medium" },
+            { lat: 28.5806, lng: 77.2105, desc: "Burglary - 2 cases", level: "low" },
+            { lat: 28.6500, lng: 77.2370, desc: "Pickpocketing - 8 cases", level: "medium" },
+            { lat: 28.7000, lng: 77.2500, desc: "Chain Snatching - 12 cases", level: "high" },
+            { lat: 28.6700, lng: 77.2900, desc: "Harassment - 6 cases", level: "medium" },
+            { lat: 28.5600, lng: 77.2200, desc: "Car Theft - 3 cases", level: "low" }
+        ];
+
+        function getColor(level) {
+            return level === "high" ? "red" : level === "medium" ? "yellow" : "green";
+        }
+
+        function plotCrimeData() {
+            crimeSpots.forEach(crime => {
+                L.circle([crime.lat, crime.lng], {
+                    color: getColor(crime.level),
+                    fillColor: getColor(crime.level),
+                    fillOpacity: 0.5,
+                    radius: 500
+                }).addTo(crimeMap).bindPopup(`<b>${crime.desc}</b>`);
+            });
+        }
+
+        function updateCrimeData() {
+            alert("📢 Crime data updated based on new survey responses!");
+            // Simulate user survey updating crime hotspots
+            crimeSpots.push({ lat: 28.6448, lng: 77.2167, desc: "Snatching - 7 cases", level: "medium" });
+            crimeSpots.push({ lat: 28.6700, lng: 77.2300, desc: "Harassment - 4 cases", level: "high" });
+
+            plotCrimeData();
+        }
+
+        plotCrimeData();
+    </script>
+</body>
+</html>

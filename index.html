@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHE | Safe Street</title>
+    
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #fff;
+            color: #333;
+            text-align: center;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #222;
+            padding: 15px 30px;
+        }
+
+        .logo img {
+            width: 100px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #FF69B4;
+        }
+
+        .cta-btn {
+            background: #FF69B4;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        .cta-btn:hover {
+            background: #fff;
+            color: #FF69B4;
+        }
+
+        /* Hero Section */
+        .hero {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Full screen */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures video covers the whole section */
+    z-index: -1; /* Puts the video behind the content */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 80%;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay for readability */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+        .hero {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 50px 10%;
+        }
+
+        .hero-content {
+            max-width: 500px;
+            text-align: left;
+        }
+
+        .hero img {
+            width: 400px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .btn {
+            background: #FF69B4;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #fff;
+            color: #FF69B4;
+        }
+
+        /* Features */
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .feature-box {
+            background: #fff;
+            color: #222;
+            padding: 20px;
+            border-radius: 10px;
+            width: 250px;
+            text-align: center;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+
+        .feature-box:hover {
+            transform: scale(1.05);
+        }
+
+        .feature-box i {
+            font-size: 40px;
+            color: #FF69B4;
+            margin-bottom: 10px;
+        }
+
+        /* About Us Section */
+        .about {
+            background: #222;
+            color: white;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .about h2 {
+            font-size: 2rem;
+            color: #FF69B4;
+            margin-bottom: 10px;
+        }
+
+        .about p {
+            font-size: 1rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .about span {
+            color: #FF69B4;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        .footer {
+            background: #6a0dad;
+            padding: 40px;
+            color: white;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            text-align: left;
+        }
+
+        .footer div {
+            margin-bottom: 20px;
+        }
+
+        .footer h3 {
+            color: #FF69B4;
+            margin-bottom: 10px;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin: 5px 0;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-content {
+                text-align: center;
+            }
+
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo"><img src="logo.jpeg" alt="SHE Logo"></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <!-- <li><a href="live-view.html">Guardian Eye</a></li> -->
+            <li><a href="safe-street.html">Safe Street</a></li>
+            <li><a href="crimespots.html">Past Crime</a></li>
+            <li><a href="msg.html">Contribute</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="cta-btn">Join Us</button>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <video autoplay loop muted playsinline class="hero-video">
+            <source src="hvdo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-content">
+            <h1>Ensuring Women's Safety, <br> One Street at a Time</h1>
+            <p>Empowering women through technology. Find the safest routes, view live updates, and contribute to a secure world.</p>
+            <button class="btn"><a href="safe-street.html">Get Started</a></button>
+        </div>
+    </header>
+
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="feature-box">
+            <a href="safe-street.html">
+            <i class="fas fa-map-marker-alt"></i>
+            <h3>Safe Street Mapping</h3></a>
+            <p>Get real-time updates on the safest routes with crime analytics.</p>
+        </div>
+        <div class="feature-box">
+            <a href="live-view.html">
+            <i class="fas fa-video"></i>
+            <h3>Live Surveillance</h3></a>
+            <p>Access live street views to stay informed about your surroundings.</p>
+        
+        </div>
+        <div class="feature-box">
+            <a href="contact.html">
+            <i class="fas fa-handshake"></i>
+            <h3>Community Contribution</h3></a>
+            <p>Report incidents and help build a safer environment for all.</p>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="about">
+        <h2>About SHE</h2>
+        <p>
+            <span>SHE</span> is dedicated to empowering women by ensuring their safety and freedom. 
+            Our platform provides real-time safety insights, live street views, and emergency contact options—all in one place. 
+            With a modern, sleek design inspired by strength and grace, we aim to create a safer world for everyone.
+        </p>
+        <p><span>Join us</span> in making every street a <span>Safe Street</span>.</p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div>
+            <h3>Contact Us</h3>
+            <p>Email: contact@she-safe.com</p>
+            <p>Phone: +91 12345 67890</p>
+        </div>
+        <div>
+            <h3>Quick Links</h3>
+            <a href="#">Home</a>
+            <a href="#">About Us</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+        </div>
+        <div>
+            <h3>Follow Us</h3>
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+            <a href="#">Instagram</a>
+        </div>
+    </footer>
+
+</body>
+</html>
